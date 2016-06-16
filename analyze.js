@@ -1,5 +1,6 @@
 var median = require('median');
 var clone = require('clone');
+var flatten = require('flat');
 
 /**
  * Provide a raw analysis of the given array
@@ -13,7 +14,7 @@ function analyze(array) {
         original: array,
         report() {
             // set this as the first argument
-            let args = Array.from(arguments);
+            const args = Array.from(arguments);
             args.unshift(this);
 
             // .. and call the report function
@@ -21,8 +22,11 @@ function analyze(array) {
         }
     };
 
+    // flatten all entries of the array for the analysis phase
+    array = array.map(entry => flatten(entry));
+
+    const allKeys = [];
     let isFirst = true;
-    let allKeys = [];
     let itemsCovered = 0;
 
     // First iteration
@@ -31,17 +35,17 @@ function analyze(array) {
     // * log occurrence count for:
     //   * keys
     //   * values for a key
-    for (let item of array) {
+    for (const item of array) {
 
         // ---
 
-        for (let key of Object.keys(item)) {
+        for (const key of Object.keys(item)) {
 
             // create entry for key.
             if (! analysis.keys[key]) {
                 analysis.keys[key] = {};
                 analysis.keys[key].occurrences = 0;
-                let valueStorage = analysis.keys[key]._values = [];
+                const valueStorage = analysis.keys[key]._values = [];
 
                 // Use function to avoid type
                 // coercion into string.
@@ -57,7 +61,7 @@ function analyze(array) {
                         return setValue;
                     }
 
-                    for (let value of valueStorage) {
+                    for (const value of valueStorage) {
                         if (value._valueData === key) {
                             return value;
                         }
@@ -102,7 +106,7 @@ function analyze(array) {
             }
         }
 
-        for (let key of allKeys) {
+        for (const key of allKeys) {
             if (! Object.keys(item).includes(key)) {
                 if (! analysis.keys[key].types['undefined']) {
                     analysis.keys[key].types['undefined'] = {
@@ -125,12 +129,12 @@ function analyze(array) {
     //   * true
     //   * false
     //   * other (non-boolean or not set)
-    for (let key of Object.keys(analysis.keys)) {
+    for (const key of Object.keys(analysis.keys)) {
 
-        let numericValues = [];
+        const numericValues = [];
 
         if (analysis.keys[key].types['number']) {
-            for (let item of array) {
+            for (const item of array) {
                 if (typeof item[key] == 'number') {
                     numericValues.push(item[key]);
                 }
@@ -144,7 +148,7 @@ function analyze(array) {
             let falseCount = 0;
             let otherCount = 0;
 
-            for (let item of array) {
+            for (const item of array) {
 
                 switch (item[key]) {
                     case true:
@@ -174,11 +178,11 @@ function analyze(array) {
  * of the collected data.
  */
 function report(analysis) {
-    let fullReport = {};
+    const fullReport = {};
 
-    for (let key of Object.keys(analysis.keys)) {
-        let value = analysis.keys[key];
-        let report = fullReport[key] = {};
+    for (const key of Object.keys(analysis.keys)) {
+        const value = analysis.keys[key];
+        const report = fullReport[key] = {};
 
         // median
         if (value.types['number']) {
@@ -204,8 +208,8 @@ function report(analysis) {
         // list value percentages
         report.valuePercentages = [];
 
-        for (let val of report.possibleValues) {
-            let info = value.values(val);
+        for (const val of report.possibleValues) {
+            const info = value.values(val);
 
             let percentage;
             if (info) {

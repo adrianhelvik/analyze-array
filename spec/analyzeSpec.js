@@ -143,6 +143,30 @@ describe('analyze', () => {
         assert.deepEqual(analysis.keys['b'].values(), [2]);
     });
 
+    it('works with nested structures', () => {
+
+        // Arrange...
+
+        let array = [
+            {
+                a: { b: { c: [ 0, 1, 2, 3, 4 ] } }
+            }
+        ];
+
+        // Act...
+
+        let analysis = analyze(array);
+
+        // Assert...
+
+        Object.keys(analysis.keys).should.include.members([
+            'a.b.c.0',
+            'a.b.c.1',
+            'a.b.c.2',
+            'a.b.c.3',
+            'a.b.c.4',
+        ]);
+    });
 });
 
 describe('analyze(...).report()', () => {

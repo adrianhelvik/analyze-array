@@ -2,7 +2,7 @@
   "name": "analyze",
   "version": "1.0.0",
   "description": "",
-  "main": "analyze.js",
+  "main": "index.js",
   "scripts": {
     "test": "jasmine"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "clone": "^1.0.2",
+    "flat": "^2.0.0",
     "median": "0.0.2"
   },
   "devDependencies": {
