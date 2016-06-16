@@ -45,18 +45,18 @@ analyze
 -------
 * It lists the median number if the value can be a number (otherwise null)
     * Type: number or null
-    * report.‹key›.median
+    * `report.‹key›.median`
 * It lists the percentage of true/false/nonBoolean for all values
     * Type: number
-    * report.‹key›.percentageTrue
-    * report.‹key›.percentageFalse
-    * report.‹key›.percentageNonBoolean
+    * `report.‹key›.percentageTrue`
+    * `report.‹key›.percentageFalse`
+    * `report.‹key›.percentageNonBoolean`
 * It lists the number of possible values
-    * Type: Array
-    * report.‹key›.possibleValues
+    * Type: `Array`
+    * `report.‹key›.possibleValues`
 * It lists the percentage of occurrences for all values
-    * Type: Array of objects
-    * report.‹key›.valuePercentages
+    * Type: `[object]`
+    * `report.‹key›.valuePercentages`
         * `[ { value: ‹value›, percentage: ‹percentage› }, ... ]`
 
 
