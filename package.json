@@ -1,14 +1,14 @@
 {
   "name": "analyze-array",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Analyze an array of objects. Made for API analysis.",
   "main": "index.js",
   "scripts": {
     "test": "jasmine"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/adrianhelvik/analyze-array"
+    "type": "git",
+    "url": "https://github.com/adrianhelvik/analyze-array"
   },
   "author": "",
   "license": "ISC",

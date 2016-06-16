@@ -4,4 +4,4 @@ exports = module.exports = function (array) {
     return rawAnalyze(array).report();
 };
 
-exports.rawAnalyze = rawAnalyze;
+exports.raw = rawAnalyze;

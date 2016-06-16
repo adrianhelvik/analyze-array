@@ -220,7 +220,7 @@ describe('analyze(...).report()', () => {
         assert.equal(report.c.percentageNonBoolean, 100);
     });
 
-    it('lists the number of possible values', () => {
+    it('lists all possible values', () => {
 
         // Arrage...
         let array = [
