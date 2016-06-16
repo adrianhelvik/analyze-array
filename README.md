@@ -33,7 +33,7 @@ console.log(pretty(analysis));
 What data is available
 ======================
 
-This is copied directly from the spec. If you're not sure about anything,
+This is copied directly from the spec. If you're unsure about anything,
 check out the spec. The result of analyze.raw is made to ease the collection
 of data, while the result of analyze is made to be easily digestable.
 
