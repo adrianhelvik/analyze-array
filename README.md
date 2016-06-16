@@ -76,5 +76,10 @@ analyze.raw (more data, uglier formatting)
 Testing
 =======
 
-`npm i -g jasmine`
-`npm test`
+* `npm i -g jasmine`
+* `npm test`
+
+Notes
+=====
+
+Pull requests are very welcome!
