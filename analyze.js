@@ -1,12 +1,24 @@
 var median = require('median');
 var clone = require('clone');
 
+/**
+ * Provide a raw analysis of the given array
+ */
 function analyze(array) {
+
+    array = clone(array);
 
     var analysis = {
         keys: {},
-        original: clone(array),
-        report: report
+        original: array,
+        report() {
+            // set this as the first argument
+            let args = Array.from(arguments);
+            args.unshift(this);
+
+            // .. and call the report function
+            return report.apply(null, args);
+        }
     };
 
     let isFirst = true;
@@ -157,8 +169,11 @@ function analyze(array) {
     return analysis;
 }
 
-function report() {
-    let analysis = this;
+/**
+ * Provide a cleaner more user friendly report
+ * of the collected data.
+ */
+function report(analysis) {
     let fullReport = {};
 
     for (let key of Object.keys(analysis.keys)) {
@@ -187,7 +202,22 @@ function report() {
         report.possibleValues = value.values();
 
         // list value percentages
-        report.valuePercentages = []; // TODO
+        report.valuePercentages = [];
+
+        for (let val of report.possibleValues) {
+            let info = value.values(val);
+
+            let percentage;
+            if (info) {
+                percentage = info.occurrences / analysis.original.length * 100;
+            } else {
+                percentage = 0;
+            }
+            report.valuePercentages.push({
+                value: val,
+                percentage
+            });
+        }
     }
 
     return fullReport;

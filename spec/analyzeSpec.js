@@ -35,14 +35,18 @@ describe('analyze', () => {
         let array = [
             { a: 'b' },
             { a: 'c', b: 'd' },
-            { a: 'c' }
+            { a: 'c' },
+            { a: 1, d: 1 },
+            { a: 1 }
         ];
 
         let analysis = analyze(array);
 
         assert.equal(analysis.keys['a'].values('b').occurrences, 1);
+        assert.equal(analysis.keys['a'].values(1).occurrences, 2);
         assert.equal(analysis.keys['b'].values('d').occurrences, 1);
         assert.equal(analysis.keys['a'].values('c').occurrences, 2);
+        assert.equal(analysis.keys['d'].values(1).occurrences, 1);
     });
 
     it('stores the possible types for values of keys', () => {
@@ -146,7 +150,7 @@ describe('analyze(...).report()', () => {
 
         // Arrange...
 
-        let arr = [
+        let array = [
             { a: 1, c: 2, d: 'hey' },
             { a: 3, c: 4 },
             { a: '3', c: '5' }, // not counted
@@ -155,7 +159,7 @@ describe('analyze(...).report()', () => {
 
         // Act...
 
-        let report = analyze(arr).report();
+        let report = analyze(array).report();
 
         // Assert...
 
@@ -168,14 +172,14 @@ describe('analyze(...).report()', () => {
 
         // Arrange...
 
-        let arr = [
+        let array = [
             { a: true, b: false, c: 'hey' },
             { a: 'yo', b: true }
         ];
 
         // Act...
 
-        let report = analyze(arr).report();
+        let report = analyze(array).report();
 
         // Assert...
 
@@ -195,7 +199,7 @@ describe('analyze(...).report()', () => {
     it('lists the number of possible values', () => {
 
         // Arrage...
-        let arr = [
+        let array = [
             { a: 1, b: 1 },
             { a: 2, b: 2 },
             { a: 1, b: '2' }
@@ -203,7 +207,7 @@ describe('analyze(...).report()', () => {
 
         // Act...
 
-        let report = analyze(arr).report();
+        let report = analyze(array).report();
 
         // Assert...
 
@@ -214,7 +218,7 @@ describe('analyze(...).report()', () => {
     it('lists the percentage of occurrences for all values', () => {
 
         // Arrage...
-        let arr = [
+        let array = [
             { a: 1, b: 1 },
             { a: 2, b: 2 },
             { a: 1, b: '2' }
@@ -222,21 +226,22 @@ describe('analyze(...).report()', () => {
 
         // Act...
 
-        let report = analyze(arr).report();
+        let analysis = analyze(array);
+        let report = analysis.report();
 
         // Assert...
 
-        report.a.valuePercentages
-            .should.deep.include.members({ value: 1, percentage: 2 / 3 * 100 });
-        report.a.valuePercentages
-            .should.deep.include.members({ value: 2, percentage: 1 / 3 * 100 });
+        expect(report.a.valuePercentages)
+            .to.deep.include({ value: 1, percentage: 2 / 3 * 100 });
+        expect(report.a.valuePercentages)
+            .to.deep.include({ value: 2, percentage: 1 / 3 * 100 });
 
-        report.b.valuePercentages
-            .should.deep.include.members({ value: 1, percentage: 1 / 3 * 100 });
-        report.b.valuePercentages
-            .should.deep.include.members({ value: 2, percentage: 1 / 3 * 100 });
-        report.b.valuePercentages
-            .should.deep.include.members({ value: '2', percentage: 1 / 3 * 100 });
+        expect(report.b.valuePercentages)
+            .to.deep.include({ value: 1, percentage: 1 / 3 * 100 });
+        expect(report.b.valuePercentages)
+            .to.deep.include({ value: 2, percentage: 1 / 3 * 100 });
+        expect(report.b.valuePercentages)
+            .to.deep.include({ value: '2', percentage: 1 / 3 * 100 });
 
     });
 });
