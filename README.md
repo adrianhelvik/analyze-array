@@ -8,7 +8,7 @@ Usage
 
 ```javascript
 const analyze = require('analyze-array');
-const {pretty: render} = require('prettyjson');
+const {render: pretty} = require('prettyjson');
 
 const analysis = analyze([
     {
