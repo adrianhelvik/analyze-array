@@ -44,10 +44,10 @@ major version.
 analyze
 -------
 * It lists the median number if the value can be a number (otherwise null)
-    * Type: number or null
+    * Type: `number` or `null`
     * `report.‹key›.median`
 * It lists the percentage of true/false/nonBoolean for all values
-    * Type: number
+    * Type: `number`
     * `report.‹key›.percentageTrue`
     * `report.‹key›.percentageFalse`
     * `report.‹key›.percentageNonBoolean`
