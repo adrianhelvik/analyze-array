@@ -1,6 +1,6 @@
 {
   "name": "analyze-array",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Analyze an array of objects. Made for API analysis.",
   "main": "index.js",
   "scripts": {

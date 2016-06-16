@@ -6,6 +6,9 @@ Installation
 Usage
 =====
 
+Input
+-----
+
 ```javascript
 const analyze = require('analyze-array');
 const {render: pretty} = require('prettyjson');
@@ -28,6 +31,60 @@ const analysis = analyze([
 ]);
 
 console.log(pretty(analysis));
+```
+
+Output
+------
+
+```yaml
+a:
+  median:               55
+  percentageTrue:       0
+  percentageFalse:      0
+  percentageNonBoolean: 100
+  possibleValues:
+    - 10
+    - 100
+  valuePercentages:
+    -
+      value:      10
+      percentage: 50
+    -
+      value:      100
+      percentage: 50
+b:
+  median:               30
+  percentageTrue:       0
+  percentageFalse:      0
+  percentageNonBoolean: 100
+  possibleValues:
+    - 30
+  valuePercentages:
+    -
+      value:      30
+      percentage: 50
+c.d:
+  median:               40
+  percentageTrue:       0
+  percentageFalse:      0
+  percentageNonBoolean: 100
+  possibleValues:
+    - 40
+  valuePercentages:
+    -
+      value:      40
+      percentage: 100
+c.e:
+  median:               null
+  percentageTrue:       0
+  percentageFalse:      50
+  percentageNonBoolean: 50
+  possibleValues:
+    - false
+  valuePercentages:
+    -
+      value:      false
+      percentage: 50
 ```
 
 What data is available
