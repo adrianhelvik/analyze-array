@@ -1,0 +1,19 @@
+{
+  "name": "analyze",
+  "version": "1.0.0",
+  "description": "",
+  "main": "analyze.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clone": "^1.0.2",
+    "median": "0.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "tape": "^4.5.1"
+  }
+}
